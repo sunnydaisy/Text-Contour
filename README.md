@@ -1,7 +1,7 @@
 # Text-Contour
 * 머신러닝과 OpenCV 활용한 글자 검출
-** 외국인을 위한 메뉴판 번역 기능에 추가하는 용도이므로 메뉴판 글씨 인식에 초점을 맞춤
-** 이미지 내에서 글자 윤곽선을 찾아 그룹으로 추출해 내기 (텍스트 덩어리 추출)
+** 외국인을 위한 메뉴판 번역 기능에 추가하는 용도이므로 메뉴판 글씨 인식에 초점을 맞춤  
+** 이미지 내에서 글자 윤곽선을 찾아 그룹으로 추출해 내기 (텍스트 덩어리 추출)  
 * naver d2 참조 https://d2.naver.com/helloworld/8344782
 
 1.이미지 수집
@@ -11,26 +11,26 @@
 ** 창문 틀, 상자, 안경과 같은 이미지도 바운딩 박스처리 되므로 제거 필요
 ** 글자 이미지는 1폴더 글자가 아닌 이미지는 0폴더에 저장
 
-1.영상처리
+2.영상처리
 -----------
 1)gray 변환
 * 글자 검출에는 색이 필요 없으므로 회색조(gray scale) or 흑백(binary)로 변환하여 추출
 1)모폴로지기법 MORPH_GRADIENT
 * dilation과 erosion 이미지 차이
-1)Adaptive threshold
-* 임계값 적용하면 불필요한 영역 잡영(noise) 제거하는 효과 있어 사물 탐지할 때 Contour 추출 가능
-** original, global, mean, gaussian 중 mean 선택
-1)morphology close
-* Opening과 반대로 Dilation 연산을 먼저 적용한 후,  Erosion 연산을 적용한다.
-* 오브젝트에 있는 작은 검은색 구멍들을 메우는데 사용
-1)houghlinesp
-* 허프변환 통해 직선 찾기
-1)bounding box 처리
-* 바운딩 박스부분만 따로 이미지 저장
-* 너무 작은 이미지는 수집되지 않도록 함
+1)Adaptive threshold  
+* 임계값 적용하면 불필요한 영역 잡영(noise) 제거하는 효과 있어 사물 탐지할 때 Contour 추출 가능  
+** original, global, mean, gaussian 중 mean 선택  
+1)morphology close  
+* Opening과 반대로 Dilation 연산을 먼저 적용한 후,  Erosion 연산을 적용한다.  
+* 오브젝트에 있는 작은 검은색 구멍들을 메우는데 사용  
+1)houghlinesp  
+* 허프변환 통해 직선 찾기  
+1)bounding box 처리  
+* 바운딩 박스부분만 따로 이미지 저장  
+* 너무 작은 이미지는 수집되지 않도록 함  
 
-* NMS(non_max_suppression) 함수 사용
+* NMS(non_max_suppression) 함수 사용  
 
-1.모델링
+3.모델링
 -----------
 
