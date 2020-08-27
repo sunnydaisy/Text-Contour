@@ -15,38 +15,47 @@ Text-Contour
 
 영상처리
 -----------
-1.gray 변환
-  * 글자 검출에는 색이 필요 없으므로 회색조(gray scale) or 흑백(binary)로 변환하여 추출
+* gray 변환
+  - 글자 검출에는 색이 필요 없으므로 회색조(gray scale) or 흑백(binary)로 변환하여 추출
   
-2.모폴로지기법 MORPH_GRADIENT
-  * dilation과 erosion 이미지 차이
+* 모폴로지기법 MORPH_GRADIENT
+  - dilation과 erosion 이미지 차이
   
-3.Adaptive threshold  
-  * 임계값 적용하면 불필요한 영역 잡영(noise) 제거하는 효과 있어 사물 탐지할 때 Contour 추출 가능  
-    * original, global, mean, gaussian 중 mean 선택  
+* Adaptive threshold  
+  - 임계값 적용하면 불필요한 영역 잡영(noise) 제거하는 효과 있어 사물 탐지할 때 Contour 추출 가능  
+    + original, global, mean, gaussian 중 mean 선택  
     
-4.morphology close  
-  * Opening과 반대로 Dilation 연산을 먼저 적용한 후,  Erosion 연산을 적용한다.  
-  * 오브젝트에 있는 작은 검은색 구멍들을 메우는데 사용  
+* morphology close  
+  - Opening과 반대로 Dilation 연산을 먼저 적용한 후,  Erosion 연산을 적용한다.  
+  - 오브젝트에 있는 작은 검은색 구멍들을 메우는데 사용  
   
-5.houghlinesp  
-  * 허프변환 통해 직선 찾기  
+* houghlinesp  
+  - 허프변환 통해 직선 찾기  
   
-6.bounding box 처리  
-  * 바운딩 박스부분만 따로 이미지 저장  
-  * 너무 작은 이미지는 수집되지 않도록 함  
+* bounding box 처리  
+  - 바운딩 박스부분만 따로 이미지 저장  
+  - 너무 작은 이미지는 수집되지 않도록 함  
 
 * NMS(non_max_suppression) 함수 사용
 
 <div>
- <img width="320" alt="_11 21preprocessing9" src="https://user-images.githubusercontent.com/47199328/91385940-e851ac00-e86c-11ea-9513-28b29bd7261b.png">
- <img width="320" alt="_11 21preprocessing12" src="https://user-images.githubusercontent.com/47199328/91385945-e982d900-e86c-11ea-9357-d9f66fa0aac2.png">
- <img width="310" alt="11 22preprocessing2" src="https://user-images.githubusercontent.com/47199328/91387025-3f588080-e86f-11ea-96ca-a9c20569ee8a.png">
+ <img width="310" alt="_11 21preprocessing9" src="https://user-images.githubusercontent.com/47199328/91385940-e851ac00-e86c-11ea-9513-28b29bd7261b.png">
+ <img width="310" alt="_11 21preprocessing12" src="https://user-images.githubusercontent.com/47199328/91385945-e982d900-e86c-11ea-9357-d9f66fa0aac2.png">
+ <img width="300" alt="11 22preprocessing2" src="https://user-images.githubusercontent.com/47199328/91387025-3f588080-e86f-11ea-96ca-a9c20569ee8a.png">
 </div>
 
 모델링
 -----------
-
-
+* 이미지 bottleneck으로 변경 라벨은 폴더 명으로 지정   
+* Imagenet의 Inception 모델 가중치 사용하여 학습 진행   
+  - final layer 추가
+  - Cross entropy 함수: Softmax
+  - Optimizer: Gradient Descent Optimizer (경사하강법)
+  
+ > ### Softmax vs Sigmoid
+ > - Sigmoid는 Softmax의 특수 케이스로 클래스 개수만 2개일 뿐 같은 연산 수행   
+ > - Softmax는 멀티 클래스에서 동작   
+ > - Softmax_cross_entropy_with_logits vs v2: v2의 경우 Logits 및 Label이 모두 backpropagate 됨   
+     
 
 <img width="300" alt="img3_k10" src="https://user-images.githubusercontent.com/47199328/91385960-ee478d00-e86c-11ea-80a7-b7e9de35e8e0.png">
